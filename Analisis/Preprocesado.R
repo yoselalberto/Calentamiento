@@ -86,13 +86,14 @@ datos_3 <- datos_2[- which(datos_2$categoria %in% nombres_cat_3), ]
 datos_3$categoria_3 <- categoria_3
 
 ## Jerarquia 4
-categoria_4 <- datos$categoria
-categoria_4[c(16, 17)] <- c("minas subterráneas", "minas a cielo abierto (en superficie)")
-categoria_4[c(36, 37)] <- c("lecheras",  "no lecheras")
-categoria_4[c(44, 45)] <- c("lecheras",  "no lecheras")
-# agrego la jerarquia 4
-datos <- data.frame(cbind(datos, categoria_4), stringsAsFactors = FALSE, row.names = NULL) %>%
-            select(-categoria)
+# elimino la jerarquia 4
+nombres_cat_4 <- c("minería de carbón")
+datos_4 <- datos_3[-which(datos_3$categoria %in% nombres_cat_4), ]
+# categoria 4
+categoria_4 <- datos_3$categoria[- which(datos_3$categoria %in% nombres_cat_4)]
+datos_4$categoria_4 <- categoria_4
+
+
 # agrego el año
 datos$anio <- anio[i]
 
