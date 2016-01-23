@@ -46,7 +46,7 @@ categoria_2 <- c(rep.int("consumo combustibles fosiles", 19), rep.int("emisiones
                  rep.int("fermentacion enterica", 9), rep.int("manejo estiercol", 13),
                  rep.int("cultivo de arroz", 3), "manejo suelos agricolas",
                  "quemas programadas suelos", "quemas en campo residuos agrícolas",
-                 "cambios de biomasa vegetación leñosa", "conversion bosques y pastizales",
+                 "cambios de biomasa vegetacion leñosa", "conversion bosques y pastizales",
                  "captura por abandono de tierras", "emisiones y remociones de CO2",
                  "asentamientos", rep.int("desechos solidos", 2),
                  "incineracion desechos", rep.int("aguas residuales", 2),
@@ -70,27 +70,20 @@ categoria_3 <- c(rep.int("industrias de la energia", 2),
                  "consumo halocarbonos y hexafluoruro de S",
                  rep.int("vacas", 2), datos_2$categoria[46:51], 
                  rep.int("vacas", 2),
-                 rep.int(datos_2$categoria[55:78], 2), 
+                 datos_2$categoria[55:78], 
                  "tratamiento eliminación aguas residuales domésticas",
                  "tratamiento eliminación aguas residuales industriales",
                  datos_2$categoria[81:83])
 # elimino la jerarquia 3
-datos_3 <- datos_2[-c(1, 4, 11, 16, 20, 21, 24, 43, 52), ]
-# agrego la jerarquia 3
 nombres_cat_3 <- c("industrias de la energía",
                    "manufactura e industria de la construcción",
                    "transporte",
                    "otros sectores (comercial, residencial y agropecuario)",
                    "combustibles sólidos",                   
                    "petróleo y gas natural",
-                   "producción de halocarbonos y hexafluoruro de azufre"
-                   "consumo de halocarbonos y hexafluoruro de azufre"
-                   "tratamiento y eliminación de aguas residuales domésticas"
-                   "tratamiento y eliminación de aguas residuales industriales"
-                   "aviación internacional"
-                   "navegación internacional"
-                   "emisiones de co2 por quema de biomasa") 
-datos3$categoria_3 <- categoria_3
+                   "vacas") 
+datos_3 <- datos_2[- which(datos_2$categoria %in% nombres_cat_3), ]
+datos_3$categoria_3 <- categoria_3
 
 ## Jerarquia 4
 categoria_4 <- datos$categoria
