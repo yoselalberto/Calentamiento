@@ -18,8 +18,8 @@ datos_juntos <- data.frame()
 # magia
 for ( i in hoja) {
 datos <- read.xlsx("../Datos Crudos/inf_inegei_serie_tiempo_2010.xls", header = FALSE, 
-                   sheetIndex = hoja[i], rowIndex = c(8:101, 103:106), colIndex = c(1:8),
-                   na.strings = c(" ", ""), row.names = NULL, stringsAsFactors = FALSE) %>%
+                   sheetIndex = hoja[i], rowIndex = c(8:101, 103:106), 
+                   colIndex = c(1:8), row.names = NULL, stringsAsFactors = FALSE) %>%
          mutate(X1 = tolower(X1)) %>%
          tbl_df() 
 # agrego los nombres de las variables y elimino los espacios
@@ -27,9 +27,10 @@ names(datos) <- nombres
 datos$categoria <- str_trim(datos$categoria)
 ## Jerarquia I
 # Creo columnas con las categoriasd
-categoria_1 <- c(rep.int("energia", 29), rep.int("procesos industriales", 18), rep("agricultura", 31),
-                 rep.int("suelo y silvicultura", 5), rep.int("desechos (ipcc 2006)", 6), 
-                 rep.int("bunkers", 2), "quema de biomasa")
+categoria_1 <- c(rep.int("energia", 29), rep.int("procesos industriales", 18), 
+                 rep("agricultura", 31), rep.int("suelo y silvicultura", 5), 
+                 rep.int("desechos (ipcc 2006)", 6), rep.int("bunkers", 2), 
+                 "quema de biomasa")
 # elimino la jerarquia 1
 nombres_cat_1 <- c("energía", "procesos industriales", "agricultura", "bunkers",
                    "uso del suelo, cambio de uso del suelo y silvicultura",
@@ -40,22 +41,24 @@ datos_1$categoria_1 <- categoria_1
 
 ## Jerarquia II
 
-categoria_2 <- c(rep.int("consumo combustibles fosiles", 19), rep.int("emisiones fugitivas", 8),
-                 rep.int("industria minerales", 4), rep.int("industria quimica", 5),
-                 rep.int("industria metales", 4), rep.int("halocarbonos y hexafluoruro de S", 2), ###
+categoria_2 <- c(rep.int("consumo combustibles fosiles", 19), 
+                 rep.int("emisiones fugitivas", 8), rep.int("industria minerales", 4), 
+                 rep.int("industria quimica", 5), rep.int("industria metales", 4), 
+                 rep.int("halocarbonos y hexafluoruro de S", 2),
                  rep.int("fermentacion enterica", 9), rep.int("manejo estiercol", 13),
                  rep.int("cultivo de arroz", 3), "manejo suelos agricolas",
                  "quemas programadas suelos", "quemas en campo residuos agrícolas",
-                 "cambios de biomasa vegetacion leñosa", "conversion bosques y pastizales",
-                 "captura por abandono de tierras", "emisiones y remociones de CO2",
-                 "asentamientos", rep.int("desechos solidos", 2),
-                 "incineracion desechos", rep.int("aguas residuales", 2),
-                 "aviacion internacional", "navegacion internacional", 
-                 datos_1$categoria_1[92])
+                 "cambios de biomasa vegetacion leñosa", 
+                 "conversion bosques y pastizales", "captura por abandono de tierras", 
+                 "emisiones y remociones de CO2", "asentamientos", 
+                 rep.int("desechos solidos", 2), "incineracion desechos", 
+                 rep.int("aguas residuales", 2), "aviacion internacional", 
+                 "navegacion internacional", datos_1$categoria_1[92])
 # elimino la jerarquia 2
 nombres_cat_2 <- c("consumo de combustibles fósiles", "emisiones fugitivas",
-                   "industria de los minerales", "industria química", "industria de los metales",
-                   "fermentación entérica", "manejo de estiércol", "cultivo de arroz",
+                   "industria de los minerales", "industria química", 
+                   "industria de los metales", "fermentación entérica", 
+                   "manejo de estiércol", "cultivo de arroz",
                    "tratamiento y eliminación de aguas residuales")
 datos_2 <- datos_1[-which(datos_1$categoria %in% nombres_cat_2), ]
 # agrego la categoria 2
@@ -93,18 +96,19 @@ datos_4 <- datos_3[-which(datos_3$categoria %in% nombres_cat_4), ]
 categoria_4 <- datos_3$categoria[- which(datos_3$categoria %in% nombres_cat_4)]
 datos_4$categoria_4 <- categoria_4
 
-
 # agrego el año
-datos$anio <- anio[i]
+datos_4$anio <- anio[i]
 
-# los voy agregando
-datos_juntos <- rbind(datos_juntos, datos)
+# los pego al final
+datos_juntos <- rbind(datos_juntos, datos_4)
 
-rm(datos)
+rm(datos, datos_1, datos_2, datos_3, datos_4)
+gc()
 }
 
 # agrupo los datos
-datos_agrupados <- gather(data = datos_juntos, key = componente, value = emision, co2:sf6) %>%
+datos_agrupados <- gather(data = datos_juntos, key = componente,
+                          value = emision, co2:sf6) %>%
                     filter(emision != "NA", emision != 0) %>% tbl_df()
 datos <- datos_agrupados
 # lo guardo 
