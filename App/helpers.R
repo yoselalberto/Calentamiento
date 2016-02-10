@@ -1,49 +1,49 @@
-# este script contiene el codigo que haria server.R voluminoso
+# codigo de soporte para server.R 
 
 ### Graficado
 
-#stilo
-estilo <- theme(plot.title = element_text(family = "Trebuchet MS", color = "#666666", face = "bold", size = 25)) +
-          theme(axis.title = element_text(family = "Trebuchet MS", color = "#666666", face = "bold", size = 20)) +
-          theme(axis.text.x = element_text(family = "Trebuchet MS", size = 15, colour = "gray20"))
+# stilo
+estilo <- theme(text = element_text("Trebuchet MS", "bold", "#666666"),
+                plot.title  = element_text(size = 30),
+                axis.title  = element_text(size = 20),
+                axis.text.x = element_text(size = 15, colour = "gray15"))
+ 
+## Marcas
+# x
+marcas_x     <- seq(1990, 2010, by = 5)
+marquitas_x  <- seq(1990, 2010, 1)
+# y
+marcas_y_enc <- seq(0, 8e5, by = 1e5)
+marcas_y_ind <- seq(0, 5e5, by = 1e5)
 
-# ejes 
-eje_y_global_stack <- scale_y_continuous(breaks = seq(from = 6e5, to = 8e5, by = 5e4), limits = c(5.9e5, 8e5),
-                                         labels = c("600", "650", "700", "750", "800"))
-eje_y_proporcional <- scale_y_continuous(breaks = seq(from = 0, to = 1, by = 0.1), expand = c(0,0))
+# eje y
+eje_y_enc <- scale_y_continuous(breaks = marcas_y_enc,
+                                labels = as.character(seq(0, 800, by = 100)))
+eje_y_ind <- scale_y_discrete(breaks = marcas_y_ind, 
+                              labels = c("0", "100", "200", "300", "400", "500"))
+eje_y_prop <- scale_y_continuous(breaks = seq(0, 1, by = 0.1), expand = c(0, 0),
+                                 minor_breaks = NULL)
+# eje x
+eje_x <- scale_x_continuous(breaks = marcas_x, expand = c(0, 0.2),
+                                minor_breaks = marquitas_x) 
+eje_x_prop <- scale_x_continuous(breaks = marcas_x, expand = c(0, 0),
+                                 minor_breaks = marquitas_x)
 
-eje_y_individual <- scale_y_discrete(breaks = seq(from = 0, to = 5e5, by = 1e5),
-                                     labels = as.character(seq(from = 0, to = 500, by = 100)))
-
-eje_x_global <- scale_x_continuous(breaks = seq(1990, 2010, by = 5), expand = c(0, 1),
-                                   minor_breaks = seq(1990, 2010, 1)) 
-eje_x_proporcional <- scale_x_continuous(breaks = seq(1990, 2010, by = 5),
-                                         minor_breaks = seq(1990, 2010, 1), expand = c(0,0))
-
-## Geometric objects 
-
-plot_dispersion <- geom_point(size = 3, colour = "steelblue4")
+## Geometric objects
 
 # agrupados
 plot_area <- geom_area(alpha = 0.85)
-plot_proporcion <-  geom_area(size = 1, position = "fill", aes(ymax = 1), alpha = 0.8)
+plot_proporcion <-  geom_area(size = 1, position = "fill", aes(ymax = 1, fill = categoria_1), alpha = 0.8)
 
-# individuales
-plot_linea <- geom_line(size = 1)
-
-## Guias para la lectura
-
-# guia categoria I
-etiquetas_componentes <- c("Agricultura", "Aviación y \n navegación \n internacional", "Desechos",
-                           "Quema de biomasa", "Energía", "Procesos industriales",
-                           "Uso de suelo, cambio \n de uso de suelo,\n silvicultura")
-guia_I_agrupados <- scale_fill_brewer(palette = "Accent", name = "Categoría",
-                                      labels = etiquetas_componentes)
-    
-guia_I_linea <- scale_color_brewer(palette = "Accent", name = "Categoria",
-                                   labels = etiquetas_componentes)
-
-# guia gases
-guia_gases <- scale_fill_brewer(palette = "Dark2", name = "Gas",
-                  labels = c("CO2", "CH4", "N2O", "HCF's", "CF4", "C2F6", "SF6"))
-
+## Guias
+# categoria I
+et_comp <- c("Agricultura", "Aviación y \n navegación \n internacional", "Desechos",
+             "Quema de biomasa", "Energía", "Procesos industriales",
+             "Uso de suelo, cambio \n de uso de suelo,\n silvicultura")
+guia_I_enc <- scale_fill_brewer(palette = "Accent", name = "Sector",
+                                      labels = et_comp)
+guia_I_ind <- scale_color_brewer(palette = "Accent", name = "Sector",
+                                   labels = et_comp)
+# gases
+et_gas <- c("CO2", "CH4", "N2O", "HCF's", "CF4", "C2F6", "SF6")
+guia_gases <- scale_fill_brewer(palette = "Dark2", name = "Gas", labels = et_gas)
