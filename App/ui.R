@@ -7,7 +7,7 @@ shinyUI(fluidPage(
     sidebarLayout(
         
         sidebarPanel(
-            p("Evolución de la emisión de gases de efecto invernadero en México, por sector ó por gas 1990 al 2010"),
+            p("Evolución de la emisión de gases de efecto invernadero en México, por sector o por gas del 1990 al 2010"),
             
             conditionalPanel(condition = "input.pestania != 'anual'",
                 radioButtons(inputId = "opciones_comp", label = "Datos",
