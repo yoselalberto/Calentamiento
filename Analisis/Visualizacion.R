@@ -1,6 +1,7 @@
 # visualizacion 
 setwd("~/Datos/Calentamiento/Analisis")
 library(ggplot2)
+library(latex2exp)
 
 # cargado de datos
 emision_anio <- readRDS("../Datos/Emision_anio.Rds")
