@@ -6,7 +6,6 @@ library(tidyr)
 library(xts)
 # cargado de datos
 datos <- readRDS("../Datos/Datos.Rds")
-
 ##  Preprocesado de datos
 # emision por año
 emision_anio <- datos %>%
@@ -17,7 +16,6 @@ emision_anio <- datos %>%
 emision_I <- datos %>% group_by(anio, categoria_1) %>%
                   summarise(emision_I = sum(emision))
 #saveRDS(emision_I, "../Datos/Emision_I.RDS", compress = FALSE)
-
 # emision por gas
 emision_gas <- datos %>%
                group_by(anio, componente) %>%
