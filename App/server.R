@@ -5,7 +5,9 @@ library(ggplot2)
 library(RColorBrewer)
 library(latex2exp)
 # cargado de datos
-datos <- readRDS("datos/Datos.Rds")
+#datos <- readRDS("datos/Datos.Rds")
+datos <- read.table("datos/Datos.csv", row.names = NULL, sep = ",",
+                    as.is = TRUE, header = TRUE)
 source("helpers.R")
 
 shinyServer(function(input, output) {
@@ -17,7 +19,9 @@ shinyServer(function(input, output) {
         summarise(emision_I = sum(emision))
     
     emision_gas <- datos %>% group_by(anio, componente) %>%
-        summarise(evolucion_gas = sum(emision))
+        summarise(evolucion_gas = sum(emision)) %>%
+        mutate(componente = factor(componente, ordered = TRUE,
+               levels = c("co2", "ch4", "n2o", "hcfs", "cf4", "c2f6", "sf6")))
     
     # geom sector
     geom_sector_final <- reactive({
@@ -82,7 +86,7 @@ shinyServer(function(input, output) {
     ## nombre eje y
     ylab_final <- reactive({
         if (input$posicion_agrupados == "area") {
-            ylab_f <- ylab("Emisión de CO2* [Gkg]")
+            ylab_f <- ylab(TeX('Emisión de $CO_{2}^{*}$ [Gkg]'))
         }
         if (input$posicion_agrupados == "proporcional") {
             ylab_f <- ylab("Porcentaje")

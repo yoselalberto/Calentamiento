@@ -30,7 +30,7 @@ shinyUI(fluidPage(
             sliderInput("rango_anios", "Mostrar años",
                         min = 1990, max = 2010, step = 1,
                         value = c(1990, 2010), ticks = FALSE),
-            p("*:", a("CO2 eqv", href = "https://en.wikipedia.org/wiki/Carbon_dioxide_equivalent"))
+            p("*:", a("dioxido de carbono equivalente", href = "https://en.wikipedia.org/wiki/Carbon_dioxide_equivalent"))
         ),
         
         mainPanel(

@@ -32,7 +32,6 @@ eje_x <- scale_x_continuous(breaks = marcas_x, expand = c(0, 0.35),
 eje_x_prop <- scale_x_continuous(breaks = marcas_x, expand = c(0, 0.35),
                                  minor_breaks = marquitas_x)
 
-
 ## Guias
 # categoria I
 et_comp <- c("Agricultura", "Transporte\ninternacional", "Desechos",
