@@ -17,7 +17,7 @@ datos_juntos <- data.frame()
 
 # magia
 for ( i in hoja) {
-datos <- read.xlsx("../Datos Crudos/inf_inegei_serie_tiempo_2010.xls", header = FALSE, 
+datos <- read.xlsx("../Datos/inf_inegei_serie_tiempo_2010.xls", header = FALSE, 
                    sheetIndex = hoja[i], rowIndex = c(8:101, 103:106), 
                    colIndex = c(1:8), row.names = NULL, stringsAsFactors = FALSE) %>%
          mutate(X1 = tolower(X1)) %>%
