@@ -86,10 +86,10 @@ shinyServer(function(input, output) {
     ## nombre eje y
     ylab_final <- reactive({
         if (input$posicion_agrupados == "area") {
-            ylab_f <- ylab(TeX('Emisión de $CO_{2}^{*}$ [Gkg]'))
+            ylab_f <- ylab(TeX('Emission of $CO_{2}^{*}$ [Gkg]'))
         }
         if (input$posicion_agrupados == "proporcional") {
-            ylab_f <- ylab("Porcentaje")
+            ylab_f <- ylab("Percentaje")
         }       
         ylab_f
         })
@@ -131,8 +131,8 @@ shinyServer(function(input, output) {
             eje_y_anual +
             eje_x +
             coord_cartesian(xlim = c(input$rango_anios)) +
-            labs(x = "Año", y = "Emision [Gkg]") +
-            ggtitle(TeX('Emisión anual de $CO_{2}^{*}$')) +
+            labs(x = "Year", y = "Emission [Gkg]") +
+            ggtitle(TeX('Annual emission of $CO_{2}^{*}$')) +
             estilo
     })
     output$plot_sector <- renderPlot({
@@ -142,7 +142,7 @@ shinyServer(function(input, output) {
             eje_x_final() +
             coord_cartesian(xlim = c(input$rango_anios)) +
             guia_sector_final() +
-            labs(x = "Año", title = TeX('Emisión de gases de efecto invernadero')) + 
+            labs(x = "Year", title = TeX('Greenhouse effect gas emission')) + 
             ylab_final() +
             estilo
     })
@@ -154,7 +154,7 @@ shinyServer(function(input, output) {
             eje_x_final() +
             coord_cartesian(xlim = c(input$rango_anios)) +
             guia_gas_final() +
-            labs(x = "Año", title = TeX('Emisión de gases de efecto invernadero')) +
+            labs(x = "Year", title = TeX('Greenhouse effect gas emission')) +
             ylab_final() +
             estilo
     })

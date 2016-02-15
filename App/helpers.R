@@ -34,9 +34,9 @@ eje_x_prop <- scale_x_continuous(breaks = marcas_x, expand = c(0, 0.35),
 
 ## Guias
 # categoria I
-et_comp <- c("Agricultura", "Transporte\ninternacional", "Desechos",
-             "Quema de\nbiomasa", "Energía", "Procesos\nindustriales",
-             "Uso/cambio de uso\nde suelo,\nsilvicultura")
+et_comp <- c("Agriculture", "International\ntransport", "Waste",
+             "Biomass\nburning", "Energy", "Industrial\nprocesess",
+             "Land use\nchange of use,\nsilviculture")
 guia_I_enc <- scale_fill_brewer(palette = "Accent", name = "Sector",
                                       labels = et_comp)
 guia_I_ind <- scale_color_brewer(palette = "Accent", name = "Sector",
