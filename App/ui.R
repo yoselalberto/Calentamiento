@@ -2,12 +2,12 @@
 
 shinyUI(fluidPage(
   
-    titlePanel("Emisión de gases de efecto invernadero en México"),
+    titlePanel("Greenhouse effect gas emission in Mexico"),
     
     sidebarLayout(
         
         sidebarPanel(
-            p("Evolución de la emisión de gases de efecto invernadero en México, por sector o por gas del 1990 al 2010"),
+            p("Evolution of greenhouse effect gas emission in Mexico, per industry or per gas from 1990 to 2010"),
             
             conditionalPanel(condition = "input.pestania != 'anual'",
                 radioButtons(inputId = "opciones_comp", label = "Datos",
