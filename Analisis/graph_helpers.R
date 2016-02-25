@@ -25,8 +25,9 @@ eje_x_proporcional <- scale_x_continuous(breaks = seq(1990, 2010, by = 5),
                                          minor_breaks = seq(1990, 2010, 1), expand = c(0,0))
     
 # guías
-etiquetas_I <- c("Agricultura", "Aviación y \nnavegación \ninternacional", "Desechos",
-                 "Quema de biomasa", "Energía", "Procesos industriales",
-                 "Uso de suelo, cambio\nde uso de suelo,\nsilvicultura")
+etiquetas_I <- c("Agriculture", "International\ntransport", "Waste",
+                 "Biomass\nburning", "Energy", "Industrial\nprocesess",
+                 "Land use\nchange of use,\nsilviculture")
 
-etiquetas_gas <- c("CO2", "CH4", "N2O", "HCF's", "CF4", "C2F6", "SF6")
+etiquetas_gas <- list(TeX('$CO_{2}$'), TeX('$CH_{4}$'), TeX('$N_{2}O$'), TeX("HCF's"), 
+                      TeX('$CF_{4}$'), TeX('$C_{2}F_{6}$'), TeX('$SF_{6}$'))
